@@ -1,0 +1,16 @@
+{#
+ |------------------------------------------------------------------------------
+ | Accordion Template
+ |------------------------------------------------------------------------------
+#}
+
+<ul class="block block--accordion" uk-accordion>
+  {% for item in block.accordionItems.all() %}
+    <li class="uk-background-muted uk-border-rounded">
+      <a class="uk-accordion-title" href="#">{{ item.accordionTitle }}</a>
+      <div class="uk-accordion-content">
+        {{ item.accordionContent | typogrify }}
+      </div>
+    </li>
+  {% endfor %}
+</ul>

@@ -1,0 +1,17 @@
+{
+  "name": "busrides",
+  "version": "1.0.0",
+  "description": "Bus Rides Website",
+  "main": "./web/index.php",
+  "scripts": {
+    "dev": "NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "hot": "NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "production": "NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "author": "Julien Lambert-Charette <julien.lambert-charette@canada.ca>",
+  "license": "ISC",
+  "devDependencies": {
+    "laravel-mix": "^3.0.0"
+  }
+}

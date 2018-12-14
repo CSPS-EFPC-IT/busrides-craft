@@ -1,0 +1,64 @@
+{#
+ |------------------------------------------------------------------------------
+ | Gallery Template
+ |------------------------------------------------------------------------------
+#}
+
+{% switch block.galleryType %}
+  {% case 'grid' %}
+    <div class="block block--masonry uk-child-width-1-2@s uk-child-width-1-3@m uk-margin" uk-grid="masonry: true" uk-lightbox>
+      {% for item in block.galleryItems.all() %}
+        <div>
+          {% set image = item.image.one() ?? null %}
+          {% set transformedImage = craft.imager.transformImage(image, { width: 240 })%}
+          {% if transformedImage %}
+            <a href="{{ image.url }}" data-caption="{{ item.caption }}" class="">
+              <img src="{{ transformedImage.url }}" alt="{{ transformedImage.title }}" class="uk-border-rounded uk-box-shadow-small uk-box-shadow-hover-large">
+            </a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  {% case 'slider' %}
+    <div class="block block--slider uk-margin" uk-slider="autoplay: true;" >
+      <div class="uk-position-relative uk-visible-toggle uk-light">
+        <ul class="uk-slider-items uk-child-width-1-2@s uk-child-width-1-3@m uk-grid" uk-lightbox>
+          {% for item in block.galleryItems.all() %}
+            <li>
+              {% set image = item.image.one() ?? null %}
+              {% set transformedImage = craft.imager.transformImage(image, { width: 240, height: 240 })%}
+              {% if transformedImage %}
+                <a href="{{ image.url }}" data-caption="{{ item.caption }}">
+                  <img src="{{ transformedImage.url }}" alt="{{ transformedImage.title }}" class="uk-border-rounded uk-box-shadow-small uk-box-shadow-hover-large">
+                </a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+      </div>
+      <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+    </div>
+  {% case 'slideshow' %}
+    <div class="block block--slideshow uk-margin" uk-slideshow="animation: push">
+      <div class="uk-position-relative uk-visible-toggle uk-light">
+        <ul class="uk-slideshow-items" uk-lightbox>
+          {% for item in block.galleryItems.all() %}
+            <li>
+              {% set image = item.image.one() ?? null %}
+              {% set transformedImage = craft.imager.transformImage(image, { width: 960, height: 725, position: image.getFocalPoint() }) %}
+              {% if transformedImage %}
+                <a href="{{ image.url }}" data-caption="{{ item.caption }}">
+                  <img src="{{ transformedImage.url }}" alt="{{ transformedImage.title }}" class="uk-border-rounded uk-box-shadow-small uk-box-shadow-hover-large">
+                </a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+      </div>
+      <ul class="uk-slideshow-nav uk-dotnav uk-flex-center uk-margin"></ul>
+    </div>
+{% endswitch %}

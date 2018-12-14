@@ -1,0 +1,45 @@
+{
+  "require": {
+    "craftcms/cms": "3.0.35",
+    "vlucas/phpdotenv": "^2.4.0",
+    "benjamminf/craft-embedded-assets": "1.0.2",
+    "craftcms/redactor": "2.1.6",
+    "ether/simplemap": "3.3.4",
+    "verbb/super-table": "2.0.14",
+    "luwes/craft3-codemirror": "1.0.0",
+    "verbb/field-manager": "2.0.4",
+    "supercool/buttonbox": "2.0.2",
+    "monachilada/craft-matrixtoolbar": "1.0.6",
+    "angellco/spoon": "3.2.4",
+    "doublesecretagency/craft-starratings": "2.1.0",
+    "firstborn/migrationmanager": "3.0.15",
+    "studioespresso/craft-dumper": "1.3.1",
+    "marknotton/agent": "1.1.4",
+    "superbig/craft-tail": "1.0.2",
+    "nystudio107/craft-minify": "1.2.9",
+    "verbb/image-resizer": "2.0.4",
+    "amimpact/command-palette": "3.1.4",
+    "craftcms/element-api": "2.5.4",
+    "ether/logs": "3.0.0",
+    "nystudio107/craft-disqus": "1.0.7",
+    "nystudio107/craft-typogrify": "1.1.16",
+    "aelvan/imager": "v2.1.2",
+    "verbb/cp-nav": "2.0.9"
+  },
+  "autoload": {
+    "psr-4": {
+      "modules\\": "modules/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "platform": {
+      "php": "7.0"
+    }
+  },
+  "scripts": {
+    "post-root-package-install": [
+      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+    ]
+  }
+}

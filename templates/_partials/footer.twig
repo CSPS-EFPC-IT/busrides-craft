@@ -1,0 +1,47 @@
+{#
+ |------------------------------------------------------------------------------
+ | Footer Template
+ |------------------------------------------------------------------------------
+#}
+
+<footer class="footer">
+  <div class="uk-section uk-section-muted">
+    <div class="uk-container">
+      <div class="uk-grid">
+        <div class="uk-width-1-5@m">
+          <ul class="uk-list">
+            <li><a class="uk-link-text" href="#">Link Item 1</a></li>
+            <li><a class="uk-link-text" href="#">Link Item 2</a></li>
+            <li><a class="uk-link-text" href="#">Link Item 3</a></li>
+          </ul>
+        </div>
+        <div class="uk-width-1-5@m">
+          <ul class="uk-list">
+            <li><a class="uk-link-text" href="#">Link Item 4</a></li>
+            <li><a class="uk-link-text" href="#">Link Item 5</a></li>
+            <li><a class="uk-link-text" href="#">Link Item 6</a></li>
+          </ul>
+        </div>
+        <div class="uk-width-3-5@m">
+          <ul class="uk-iconnav uk-flex-right">
+          {% for profile in socialMedia.socialMediaProfiles.all() %}
+            <li class="uk-margin-small-left"><a href="{{ profile.profileUrl }}" uk-icon="icon: {{ profile.profileType}}; ratio: 2" target="_blank"></a></li>
+          {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="uk-section">
+    <div class="uk-container">
+      <div class="uk-grid">
+        <div class="uk-width-1-2@s">
+          <a class="uk-link-text" href="#">Terms &amp; Conditions</a> | <a class="uk-link-text" href="#">Transparency</a>
+        </div>
+        <div class="uk-width-1-2@s uk-text-right">
+          <img src="/assets/images/canada-logo.png" alt="{{ 'Canada Logo' | t }}">
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

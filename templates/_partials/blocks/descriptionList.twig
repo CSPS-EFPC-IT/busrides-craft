@@ -1,0 +1,14 @@
+{#
+ |------------------------------------------------------------------------------
+ | Description List Block Template
+ |------------------------------------------------------------------------------
+#}
+
+<div class="block block--descriptionList">
+  <dl class="uk-description-list uk-description-list-divider">
+    {% for item in block.listItems.all() %}
+      <dt>{{ item.term }}</dt>
+      <dd>{{ item.description | typogrify }}</dd>
+    {% endfor %}
+  </dl>
+</div>

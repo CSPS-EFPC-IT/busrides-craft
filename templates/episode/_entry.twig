@@ -1,0 +1,81 @@
+{% extends '_layouts/master' %}
+
+{% block page %}
+  {{ parent() }}
+
+  <header class="entry--hero uk-section uk-background-secondary">
+    {% set video = entry.video.one() ?? null %}
+    {% if video %}
+      <div class="uk-container">
+        {% set youtube = craft.embeddedAssets.get(video) %}
+        {% set youtubeVideoId = youtube.url | trim("https://www.youtube.com/watch?v=") %}
+        <iframe width="100%" height="500" src="https://www.youtube-nocookie.com/embed/{{ youtubeVideoId }}?controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen uk-video="autoplay: false"></iframe>
+      </div>
+    {% endif %}
+  </header>
+
+  <div class="uk-section uk-padding-remove-top">
+    <div class="uk-container">
+      <div class="entry--header uk-padding uk-position-relative">
+        {% set firstRelatedCategory = entry.category.one() ?? null %}
+        {% if firstRelatedCategory %}
+          <p class="entry--category">{{ firstRelatedCategory.title }}</p>
+        {% endif %}
+        <h1 class="entry--page-title">{{ entry.entryTitle }}</h1>
+        <p class="entry--meta uk-margin-remove-bottom"><datetime>{{ entry.postDate | date }}</datetime></p>
+      </div>
+
+      <div class="entry--soundcloud">
+        {% set podcast = entry.podcast.one() ?? null %}
+        {% if podcast %}
+          {% set soundcloud = craft.embeddedAssets.get(podcast) %}
+          {{ soundcloud ? soundcloud.html }}
+        {% endif %}
+      </div>
+
+      <div class="entry--main-content uk-grid" uk-grid>
+        <div class="uk-width-expand@m">
+          {% include '_partials/body' %}
+
+          <div class="uk-margin-large">
+            {{ 'Filed under: ' | t }}
+            {% set relatedCategories = entry.category.all() ?? null %}
+            {% for cat in relatedCategories %}
+              <a href="{{ cat.url }}" class="uk-button uk-button-default uk-button-small">{{ cat.title }}</a>
+            {% endfor %}
+          </div>
+
+          {% include '_partials/author' %}
+          {% if entry.displayComments %}
+            {% include '_partials/disqus' %}
+          {% endif %}
+        </div>
+        <div class="uk-width-1-3@m">
+          <div class="entry--sidebar uk-padding-small uk-background-muted uk-border-rounded">
+            {% if firstRelatedCategory %}
+              <h3>{{ 'Related Episodes' | t }}</h3>
+              {% set relatedEntries = craft.entries.relatedTo(firstRelatedCategory).id('not ' ~ entry.id).limit(3).all() %}
+              {% for relatedEntry in relatedEntries %}
+                <div>
+                  <h4 class="uk-margin-remove-bottom">{{ relatedEntry.entryTitle }}</h4>
+                  <p>{{ relatedEntry.entryDescription | typogrify }} <br> <a href="{{ relatedEntry.url }}">{{ 'Read more' | t }}</a></p>
+                </div>
+                {% if loop.index != relatedEntries.limit %}
+                  <hr>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block javascript %}
+  {{ parent() }}
+  {% if entry.displayComments %}
+    <script id="dsq-count-scr" src="//digital-academy.disqus.com/count.js" async></script>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,7 @@
+/.env
+/.idea
+/vendor
+/public/assets
+/public/imager
+.DS_Store
+node_modules

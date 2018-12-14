@@ -1,0 +1,31 @@
+{#
+ |------------------------------------------------------------------------------
+ | Author Template
+ |------------------------------------------------------------------------------
+#}
+
+{% set theAuthor = entry.theAuthor.one() ?? null %}
+{% if theAuthor %}
+<div class="uk-padding uk-margin-large uk-background-muted">
+  <div uk-grid>
+    {% set portrait = theAuthor.portrait.one() %}
+    {% set transformedPortrait = craft.imager.transformImage(portrait, { width: 200, height: 200 }) %}
+    {% if transformedPortrait %}
+    <div class="uk-width-1-5@s uk-text-center">
+      <img data-src="{{ transformedPortrait.url }}" alt="{{ transformedPortrait.title }}" class="uk-border-pill uk-margin" uk-img>
+      <ul class="uk-iconnav uk-iconnav-vertical">
+        {% for profile in theAuthor.socialMediaProfiles.all() %}
+          <li><a href="{{ profile.profileUrl }}" uk-icon="icon: {{ profile.profileType}}" target="_blank"></a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    <div class="uk-width-expand@s">
+      <h4 class="uk-margin-remove-bottom">{{ theAuthor.entryTitle }}</h4>
+      <p class="uk-text-meta uk-margin-remove-top"><em>{{ theAuthor.jobTitle }}</em></p>
+      <p class="uk-text-meta">{{ theAuthor.entryDescription | typogrify }}</p>
+      <p><a href="" class="uk-button uk-button-primary">{{ 'View all posts' | t }}</a></p>
+    </div>
+  </div>
+</div>
+{% endif %}

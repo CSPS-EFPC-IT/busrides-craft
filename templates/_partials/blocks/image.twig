@@ -1,0 +1,35 @@
+{#
+ |------------------------------------------------------------------------------
+ | Image Block Template
+ |------------------------------------------------------------------------------
+#}
+
+{% set image = block.image.one() ?? null %}
+{% set caption = block.caption ?? null %}
+{% set sourceName = block.source.sourceName ?? null %}
+{% set sourceUrl = block.source.sourceUrl ?? null %}
+
+{% if block.alignment == 'full-width' %}
+  {% set transformedImage = craft.imager.transformImage(image, { width: 960 }) %}
+{% else %}
+  {% set transformedImage = craft.imager.transformImage(image, { width: 390 }) %}
+{% endif %}
+
+{% if transformedImage %}
+  <div class="block block--image block--image__{{ block.alignment }} uk-{{ block.alignment }}">
+    <figure>
+      {# TODO: Work on different data-srcset for responsive images #}
+      <img class="uk-border-rounded" data-src="{{ transformedImage.url }}" alt="{{ transformedImage.title }}" width="{{ transformedImage.width }}" height="{{ transformedImage.height }}" uk-img>
+      <figcaption class="uk-text-center uk-text-meta">
+        <em>{{ caption }}</em> {{ 'by' | t }}
+        {% if sourceName or sourceUrl %}
+          {% if sourceUrl %}
+            <a href="{{ sourceUrl }}" target="_blank" rel="nofollow">{{ sourceName ?? 'Source' | t }}</a>
+          {% else %}
+            {{ sourceName }}
+          {% endif %}
+        {% endif %}
+      </figcaption>
+    </figure>
+  </div>
+{% endif %}

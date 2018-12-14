@@ -1,0 +1,120 @@
+{#
+ |------------------------------------------------------------------------------
+ | Card Template
+ |------------------------------------------------------------------------------
+#}
+
+{% set cardMedia = block.cardImage.one() ?? null %}
+{% set transformedImage = craft.imager.transformImage(cardMedia, { width: 960 }) %}
+
+{% switch block.cardLayout %}
+  {% case 'verticalMediaTop' %}
+    <div class="block block--card block--card__{{ block.cardAlignment }} uk-{{ block.cardAlignment }}">
+      <div class="uk-card uk-card-default uk-margin">
+        {% if transformedImage %}
+          <div class="uk-card-media-top">
+            <img data-src="{{ transformedImage.url }}" alt="{{ transformedImage.title }}" width="{{ transformedImage.width }}" height="{{ transformedImage.height }}" uk-img>
+          </div>
+        {% endif %}
+        <div class="uk-card-body">
+          <h3 class="uk-card-title">{{ block.cardTitle }}</h3>
+          {{ block.cardContent | typogrify }}
+        </div>
+        {% if block.cardLink.linkUrl | length %}
+          <div class="uk-card-footer">
+            <a href="{{ block.cardLink.linkUrl }}" class="uk-button uk-button-text"{% if block.cardLink.externalLink %} target="_blank"{% endif %}>
+              {% if block.cardLink.linkText | length %}
+                {{ block.cardLink.linkText }}
+              {% else %}
+                {{ 'Learn more' | t }}
+              {% endif %}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% case 'verticalMediaBottom' %}
+    <div class="block block--card block--card__{{ block.cardAlignment }} uk-{{ block.cardAlignment }}">
+      <div class="uk-card uk-card-default uk-margin">
+        <div>
+          <div class="uk-card-body">
+            <h3 class="uk-card-title">{{ block.cardTitle }}</h3>
+            {{ block.cardContent | typogrify }}
+          </div>
+          {% if block.cardLink.linkUrl | length %}
+            <div class="uk-card-footer">
+              <a href="{{ block.cardLink.linkUrl }}" class="uk-button uk-button-text"{% if block.cardLink.externalLink %} target="_blank"{% endif %}>
+                {% if block.cardLink.linkText | length %}
+                  {{ block.cardLink.linkText }}
+                {% else %}
+                  {{ 'Learn more' | t }}
+                {% endif %}
+              </a>
+            </div>
+          {% endif %}
+        </div>
+        {% if transformedImage %}
+          <div class="uk-card-media-bottom">
+            <img data-src="{{ transformedImage.url }}" alt="{{ transformedImage.title }}" width="{{ transformedImage.width }}" height="{{ transformedImage.height }}" uk-img>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% case 'horizontalMediaLeft' %}
+    <div class="block block--card">
+      <div class="uk-card uk-card-default uk-margin{% if transformedImage %} uk-child-width-1-2@s uk-grid-collapse{% endif %}"{% if transformedImage %} uk-grid{% endif %}>
+        {% if transformedImage %}
+          <div class="uk-card-media-left uk-cover-container">
+            <img src="{{ transformedImage.url }}" alt="{{ transformedImage.title }}" width="{{ transformedImage.width }}" height="{{ transformedImage.height }}" uk-cover>
+            <canvas width="390" height="390"></canvas>
+          </div>
+        {% endif %}
+        <div>
+          <div class="uk-card-body">
+            <h3 class="uk-card-title">{{ block.cardTitle }}</h3>
+            {{ block.cardContent | typogrify }}
+          </div>
+          {% if block.cardLink.linkUrl | length %}
+            <div class="uk-card-footer">
+              <a href="{{ block.cardLink.linkUrl }}" class="uk-button uk-button-text"{% if block.cardLink.externalLink %} target="_blank"{% endif %}>
+                {% if block.cardLink.linkText | length %}
+                  {{ block.cardLink.linkText }}
+                {% else %}
+                  {{ 'Learn more' | t }}
+                {% endif %}
+              </a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% case 'horizontalMediaRight' %}
+    <div class="block block--card">
+      <div class="uk-card uk-card-default uk-margin{% if transformedImage %} uk-child-width-1-2@s uk-grid-collapse{% endif %}"{% if transformedImage %} uk-grid{% endif %}>
+      {% if transformedImage %}
+        <div class="uk-flex-last@s uk-card-media-right uk-cover-container">
+          <img src="{{ transformedImage.url }}" alt="{{ transformedImage.title }}" width="{{ transformedImage.width }}" height="{{ transformedImage.height }}" uk-cover>
+          <canvas width="390" height="390"></canvas>
+        </div>
+      {% endif %}
+      <div>
+        <div class="uk-card-body">
+          <h3 class="uk-card-title">{{ block.cardTitle }}</h3>
+          {{ block.cardContent | typogrify }}
+        </div>
+        {% if block.cardLink.linkUrl | length %}
+          <div class="uk-card-footer">
+            <a href="{{ block.cardLink.linkUrl }}" class="uk-button uk-button-text"{% if block.cardLink.externalLink %} target="_blank"{% endif %}>
+              {% if block.cardLink.linkText | length %}
+                {{ block.cardLink.linkText }}
+              {% else %}
+                {{ 'Learn more' | t }}
+              {% endif %}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endswitch %}
+

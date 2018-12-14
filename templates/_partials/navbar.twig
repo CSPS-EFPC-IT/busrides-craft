@@ -1,0 +1,55 @@
+{#
+ |------------------------------------------------------------------------------
+ | Navbar template
+ |------------------------------------------------------------------------------
+#}
+
+{# Query elements for navbar links #}
+{% set navbarLinks = craft.entries.section(['episodes', 'events']).all() %}
+
+<nav class="uk-navbar-container">
+  <div class="uk-container">
+    <div class="uk-navbar">
+
+      <div class="uk-navbar-left">
+        {# Navbar logo #}
+        <a href="{{ siteUrl }}" class="uk-navbar-item uk-logo">{{ siteName }}</a>
+        {# Navbar search #}
+        <div class="uk-navbar-item uk-visible@m">
+          <form action="javascript:void(0);">
+            <div class="uk-inline">
+              <button type="submit" class="uk-form-icon" uk-icon="icon: search" title="{{ 'Start searching!' | t }}"></button>
+              <input type="text" class="uk-input uk-form-small" placeholder="{{ 'Search' | t }}">
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="uk-navbar-right">
+        {# Navbar nav for desktop #}
+        <ul class="uk-navbar-nav uk-visible@m">
+          {% for entry in navbarLinks %}
+            <li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
+          {% endfor %}
+          <li>{% include '_partials/switcher' %}</li>
+        </ul>
+        {# Navbar toggle for mobile #}
+        <div class="uk-hidden@m">
+          <a href="#" class="uk-navbar-toggle" aria-expanded="false">
+            <span class="uk-navbar-toggle-icon uk-icon" uk-navbar-toggle-icon></span>
+          </a>
+        </div>
+        {# TODO: Change for offcanvas with search bar #}
+        <div class="uk-navbar-dropdown" uk-drop="mode: click; cls-drop: uk-navbar-dropdown; pos: bottom-right;">
+          <ul class="uk-nav uk-navbar-dropdown-nav">
+            {% nav entry in navbarLinks %}
+              <li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
+            {% endnav %}
+            <li>{% include '_partials/switcher' %}</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</nav>

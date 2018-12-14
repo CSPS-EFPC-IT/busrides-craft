@@ -1,0 +1,62 @@
+{#
+ |------------------------------------------------------------------------------
+ | Master template
+ |------------------------------------------------------------------------------
+#}
+
+<!doctype html>
+<html lang="{{ currentSite.language }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{% block title %}{{ entry.title }} | {{ siteName }}{% endblock %}</title>
+  {% block metadata %}
+    <meta name="description" content="">
+  {% endblock %}
+
+  {# TODO: Refactor for compiled sass version of UIKIT. #}
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Serif+Pro:400,700">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/css/uikit.min.css" />
+  {% block stylesheets %}
+    <link rel="stylesheet" href="/assets/css/app.css">
+  {% endblock %}
+  {# Output custom CSS from the Site Settings page.  #}
+  {% if siteSettings.customCss|length %}
+    {% minify css %}
+      <style type="text/css">
+        {{ siteSettings.customCss|raw }}
+      </style>
+    {% endminify %}
+  {% endif %}
+</head>
+<body>
+  {# Outputs any scripts and styles that were registered for the “begin body” position. #}
+  {{ beginBody() }}
+
+  {% include '_partials/navbar' %}
+
+  {% block page %}{% endblock %}
+
+  {% include '_partials/footer' %}
+
+  {# TODO: Refactor for compiled js version of UIKIT. #}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/js/uikit.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/js/uikit-icons.min.js"></script>
+  {% block javascripts %}
+    <script src="/assets/js/app.js"></script>
+  {% endblock %}
+  {# Output custom JavaScript from the Site Settings page. #}
+  {% if siteSettings.customJavascript|length %}
+    {% minify js %}
+      <script type="text/javascript">
+        {{ siteSettings.customJavascript|raw }}
+      </script>
+    {% endminify %}
+  {% endif %}
+
+  {# Outputs any scripts and styles that were registered for the "end body" position. #}
+  {{ endBody() }}
+</body>
+</html>

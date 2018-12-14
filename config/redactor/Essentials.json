@@ -1,0 +1,6 @@
+{
+  "buttons": ["html", "formatting", "bold", "italic", "underline", "unorderedlist", "orderedlist", "link"],
+  "plugins": ["fullscreen"],
+  "linkNewTab": true,
+  "toolbarFixed": true
+}

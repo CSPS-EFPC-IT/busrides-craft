@@ -1,0 +1,20 @@
+{#
+ |------------------------------------------------------------------------------
+ | Blockquote Template
+ |------------------------------------------------------------------------------
+#}
+
+<div class="block block--blockquote block--blockquote__{{ block.alignment }} uk-{{ block.alignment }}">
+  <blockquote{% if block.quoteUrl %} cite="{{ block.quoteUrl }}"{% endif %} class="uk-background-muted uk-padding uk-margin uk-panel uk-border-rounded">
+    <p class="uk-margin-small-bottom">{{ block.text }}</p>
+    {% if block.author %}
+      <footer>
+        {% if block.quoteUrl %}
+          <a href="{{ block.quoteUrl }}" target="_blank" rel="nofollow">{{ block.author }}</a>
+        {% else %}
+          {{ block.author }}
+        {% endif %}
+      </footer>
+    {% endif %}
+  </blockquote>
+</div>

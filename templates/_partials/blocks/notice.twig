@@ -1,0 +1,15 @@
+{#
+ |------------------------------------------------------------------------------
+ | Notice Template
+ |------------------------------------------------------------------------------
+#}
+
+<div class="block block--notice uk-alert-{{ block.noticeType }} uk-border-rounded" uk-alert>
+  {% if block.noticeDismiss %}
+    <a class="uk-alert-close" uk-close></a>
+  {% endif %}
+  <h3>{{ block.noticeTitle }}</h3>
+  <div class="block--notice--content">
+    {{ block.noticeText | typogrify }}
+  </div>
+</div>
