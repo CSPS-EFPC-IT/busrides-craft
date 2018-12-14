@@ -1,0 +1,21 @@
+{#
+ |------------------------------------------------------------------------------
+ | Events Template
+ |------------------------------------------------------------------------------
+#}
+
+{% extends '_layouts/master' %}
+
+{% block page %}
+  {{ parent() }}
+
+  <div class="uk-section uk-section-muted uk-section-large uk-text-center">
+    <div class="uk-container">
+      <h1 class="uk-heading-primary">Oops! 404</h1>
+      <p>{{ 'The page you are looking for is unavailable.' | t }}</p>
+    </div>
+  </div>
+
+  {% include '_partials/newsletter' %}
+
+{% endblock %}

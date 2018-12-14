@@ -1,6 +1,6 @@
 {#
  |------------------------------------------------------------------------------
- | Homepage template
+ | Homepage Template
  |------------------------------------------------------------------------------
 #}
 
@@ -8,4 +8,19 @@
 
 {% block page %}
   {{ parent() }}
+
+  {% include '_partials/hero' %}
+
+  {% include '_partials/episodes' with {
+    pageTitle: false,
+    queryLimit: 3,
+    queryOffset: 1,
+    showButton: true,
+    pagination: false
+  } %}
+
+  {% include '_partials/authors' %}
+
+  {% include '_partials/newsletter' %}
+
 {% endblock %}

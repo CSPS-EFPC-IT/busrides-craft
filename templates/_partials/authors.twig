@@ -1,0 +1,36 @@
+{#
+ |------------------------------------------------------------------------------
+ | Authors Template
+ |------------------------------------------------------------------------------
+#}
+
+{% set authors = craft.entries.section('author').limit(3) %}
+{% if authors | length %}
+  <div class="section--authors uk-section uk-section-muted">
+    <div class="uk-container">
+      <h2 class="uk-text-center uk-margin-large">{{ 'Behind the Mic' | t }}</h2>
+      <div class="uk-child-width-1-3@m" uk-grid uk-height-match="target: > div > .uk-card">
+        {% for a in authors %}
+          <div>
+            <div class="uk-card uk-card-default uk-text-center uk-border-rounded">
+              <div class="uk-card-body">
+                {% set portrait = a.portrait.one() ?? null %}
+                {% set tPortrait = craft.imager.transformImage(portrait, { width: 200, height: 200 }) %}
+                {% if tPortrait %}
+                  <img data-src="{{ tPortrait.url }}"
+                       alt="{{ tPortrait.url }}"
+                       width="{{ tPortrait.width }}"
+                       height="{{ tPortrait.height }}"
+                       class="uk-border-pill" uk-img>
+                {% endif %}
+                <h4 class="uk-card-title uk-margin uk-margin-remove-bottom">{{ a.entryTitle }}</h4>
+                <p class="uk-text-meta font-family--heading">{{ a.jobTitle }}</p>
+                <p>{{ a.entryDescription }}</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}

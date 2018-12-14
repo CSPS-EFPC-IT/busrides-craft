@@ -7,7 +7,7 @@
 {# Query elements for navbar links #}
 {% set navbarLinks = craft.entries.section(['episodes', 'events']).all() %}
 
-<nav class="uk-navbar-container">
+<nav class="navbar uk-navbar-container">
   <div class="uk-container">
     <div class="uk-navbar">
 
@@ -19,7 +19,7 @@
           <form action="javascript:void(0);">
             <div class="uk-inline">
               <button type="submit" class="uk-form-icon" uk-icon="icon: search" title="{{ 'Start searching!' | t }}"></button>
-              <input type="text" class="uk-input uk-form-small" placeholder="{{ 'Search' | t }}">
+              <input type="text" class="uk-input uk-form-small" placeholder="{{ 'Search' | t }}" style="border-radius: 15px;">
             </div>
           </form>
         </div>

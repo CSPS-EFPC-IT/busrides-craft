@@ -1,0 +1,31 @@
+{#
+ |------------------------------------------------------------------------------
+ | Navbar Template
+ |------------------------------------------------------------------------------
+#}
+
+<div class="section--newsletter uk-section uk-section">
+  <div class="uk-container">
+    <div class="uk-flex-middle" uk-grid>
+      <div class="uk-width-1-3@m">
+        <h3 class="section--title">
+          <span class="section--title--first uk-display-block uk-margin-remove-bottom uk-h2">
+            {{ newsletter.newsletterTitleFirstRow }}
+            <img src="/assets/images/canada-flag-grey.png" alt="{{ 'Canada Flag' | t }}">
+          </span>
+          <span class="section--title--second uk-display-block uk-h4">{{ newsletter.newsletterTitleSecondRow }}</span>
+        </h3>
+        <p>{{ newsletter.newsletterCopy | typogrify }}</p>
+        {% set bUrl = newsletter.newsletterButton.buttonUrl %}
+        {% set bText = newsletter.newsletterButton.buttonText %}
+        <p><a href="{{ bUrl }}" class="uk-button uk-button-large uk-button-primary" target="_blank">{{ bText }}</a></p>
+      </div>
+      <div class="uk-width-2-3@m">
+        {% set image = newsletter.newsletterImage.one() ?? null %}
+        {% if image %}
+          <img data-src="{{ image.url }}" alt="{{ image.title }}" width="{{ image.width }}" height="{{ image.height }}" uk-img>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

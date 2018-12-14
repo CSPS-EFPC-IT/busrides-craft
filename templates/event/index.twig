@@ -1,0 +1,20 @@
+{#
+ |------------------------------------------------------------------------------
+ | Events Template
+ |------------------------------------------------------------------------------
+#}
+
+{% extends '_layouts/master' %}
+
+{% block page %}
+  {{ parent() }}
+
+  <div class="uk-section uk-section-muted uk-section-large uk-text-center">
+    <div class="uk-container">
+      <h1 class="uk-heading-primary">{{ entry.entryTitle }}</h1>
+    </div>
+  </div>
+
+  {% include '_partials/newsletter' %}
+
+{% endblock %}

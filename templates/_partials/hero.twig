@@ -1,0 +1,22 @@
+{#
+ |------------------------------------------------------------------------------
+ | Hero Template
+ |------------------------------------------------------------------------------
+#}
+
+<div class="hero hero--full-height uk-cover-container">
+  {% set video = entry.heroBackgroundVideo.one() ?? null %}
+  {% if video %}
+    <video autoplay loop muted playsinline uk-cover>
+      <source src="{{ video.url }}" type="video/mp4">
+    </video>
+
+    <div class="uk-overlay-primary uk-position-cover"></div>
+    <div class="uk-overlay uk-position-center uk-light">
+      <div class="uk-container">
+        <h1 class="uk-heading-primary">{{ entry.heroTitle }}</h1>
+        <div class="uk-text-lead">{{ entry.heroCopy }}</div>
+      </div>
+    </div>
+  {% endif %}
+</div>

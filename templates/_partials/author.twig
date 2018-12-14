@@ -6,7 +6,7 @@
 
 {% set theAuthor = entry.theAuthor.one() ?? null %}
 {% if theAuthor %}
-<div class="uk-padding uk-margin-large uk-background-muted">
+<div class="entry--author uk-padding uk-margin-large uk-background-muted">
   <div uk-grid>
     {% set portrait = theAuthor.portrait.one() %}
     {% set transformedPortrait = craft.imager.transformImage(portrait, { width: 200, height: 200 }) %}
@@ -24,7 +24,7 @@
       <h4 class="uk-margin-remove-bottom">{{ theAuthor.entryTitle }}</h4>
       <p class="uk-text-meta uk-margin-remove-top"><em>{{ theAuthor.jobTitle }}</em></p>
       <p class="uk-text-meta">{{ theAuthor.entryDescription | typogrify }}</p>
-      <p><a href="" class="uk-button uk-button-primary">{{ 'View all posts' | t }}</a></p>
+      <p><a href="{{ theAuthor.url }}" class="uk-button uk-button-primary">{{ 'View all posts' | t }}</a></p>
     </div>
   </div>
 </div>

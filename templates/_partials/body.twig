@@ -4,6 +4,8 @@
  |------------------------------------------------------------------------------
 #}
 
-{% for block in entry.body.all() %}
-  {% include '_partials/blocks/' ~ block.type.handle %}
-{% endfor %}
+<div class="entry--body">
+  {% for block in entry.body.all() %}
+    {% include '_partials/blocks/' ~ block.type.handle %}
+  {% endfor %}
+</div>

@@ -22,7 +22,7 @@
           <p class="entry--category">{{ firstRelatedCategory.title }}</p>
         {% endif %}
         <h1 class="entry--page-title">{{ entry.entryTitle }}</h1>
-        <p class="entry--meta uk-margin-remove-bottom"><datetime>{{ entry.postDate | date }}</datetime></p>
+        <p class="entry--meta uk-margin-remove-bottom"><datetime>{{ entry.postDate | date }}</datetime> / X views / X mins read</p>
       </div>
 
       <div class="entry--soundcloud">
@@ -54,15 +54,12 @@
           <div class="entry--sidebar uk-padding-small uk-background-muted uk-border-rounded">
             {% if firstRelatedCategory %}
               <h3>{{ 'Related Episodes' | t }}</h3>
-              {% set relatedEntries = craft.entries.relatedTo(firstRelatedCategory).id('not ' ~ entry.id).limit(3).all() %}
+              {% set relatedEntries = craft.entries.relatedTo(firstRelatedCategory).id('not ' ~ entry.id).limit(3) %}
               {% for relatedEntry in relatedEntries %}
                 <div>
                   <h4 class="uk-margin-remove-bottom">{{ relatedEntry.entryTitle }}</h4>
                   <p>{{ relatedEntry.entryDescription | typogrify }} <br> <a href="{{ relatedEntry.url }}">{{ 'Read more' | t }}</a></p>
                 </div>
-                {% if loop.index != relatedEntries.limit %}
-                  <hr>
-                {% endif %}
               {% endfor %}
             {% endif %}
           </div>

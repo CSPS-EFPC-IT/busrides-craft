@@ -1,6 +1,6 @@
 /*
 |------------------------------------------------------------------------------
-| Main styles
+| General Styles
 |------------------------------------------------------------------------------
 */
 
@@ -10,6 +10,7 @@ $headingFont: 'Source Sans Pro', sans-serif;
 $bodyFont: 'Source Serif Pro', serif;
 
 html {
+  color: #707070;
   font-family: $bodyFont;
   font-size: 21px;
   line-height: 1.58;
@@ -18,7 +19,16 @@ html {
   text-rendering: optimizeLegibility;
 }
 
+.font-family--body {
+  font-family: $bodyFont;
+}
+
+.font-family--heading {
+  font-family: $headingFont;
+}
+
 .uk-h1, .uk-h2, .uk-h3, .uk-h4, .uk-h5, .uk-h6, h1, h2, h3, h4, h5, h6 {
+  color: #707070;
   font-family: $headingFont;
   margin: 0 0 30px 0;
 }
@@ -37,30 +47,30 @@ address, dl, fieldset, figure, ol, p, pre, ul, blockquote {
   }
 }
 
-.uk-margin {
-  margin-bottom: 30px;
-}
-
-.uk-section-muted,
-.uk-background-muted {
-  background-color: #eef2f5;
-}
-
-/*
-|------------------------------------------------------------------------------
-| Button
-|------------------------------------------------------------------------------
-*/
-
-.uk-button-primary {
-  color: #fff;
-  background-color: $primaryColor;
+.uk-link-text,
+a.uk-link-text {
+  color: #707070;
 
   &:hover,
   &:focus,
   &:active {
-    background-color: darken($primaryColor, 10%);
+    color: $primaryColor;
   }
+}
+
+.uk-margin {
+  margin-bottom: 30px;
+}
+
+/*
+|------------------------------------------------------------------------------
+| Section
+|------------------------------------------------------------------------------
+*/
+
+.uk-section-muted,
+.uk-background-muted {
+  background-color: #eef2f5;
 }
 
 /*
@@ -83,12 +93,38 @@ address, dl, fieldset, figure, ol, p, pre, ul, blockquote {
 
 /*
 |------------------------------------------------------------------------------
+| Hero
+|------------------------------------------------------------------------------
+*/
+
+.hero--full-height {
+  height: calc(100vh - 80px);
+}
+
+.uk-overlay-primary {
+  background: radial-gradient(rgba(#1f2a4a, 0.45), rgba(#121724, 1));
+}
+
+/*
+|------------------------------------------------------------------------------
 | Button
 |------------------------------------------------------------------------------
 */
 
 .uk-button {
   font-family: $headingFont;
+}
+
+
+.uk-button-primary {
+  color: #fff;
+  background-color: $primaryColor;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: darken($primaryColor, 10%);
+  }
 }
 
 /*
@@ -227,6 +263,16 @@ address, dl, fieldset, figure, ol, p, pre, ul, blockquote {
 
 .entry--main-content {
   margin-top: 60px;
+}
+
+/*
+|------------------------------------------------------------------------------
+| Newsletter
+|------------------------------------------------------------------------------
+*/
+
+.section--newsletter .section--title .section--title--first {
+  font-weight: 700;
 }
 
 /*

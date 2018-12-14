@@ -1,0 +1,26 @@
+{#
+ |------------------------------------------------------------------------------
+ | Episodes Template
+ |------------------------------------------------------------------------------
+#}
+
+{% extends '_layouts/master' %}
+
+{% block page %}
+  {{ parent() }}
+
+
+
+  {% include '_partials/episodes' with {
+    pageTitle: 'Episodes' | t,
+    queryLimit: 9,
+    queryOffset: null,
+    showButton: false,
+    pagination: true
+  } %}
+
+  {% include '_partials/authors' %}
+
+  {% include '_partials/newsletter' %}
+
+{% endblock %}

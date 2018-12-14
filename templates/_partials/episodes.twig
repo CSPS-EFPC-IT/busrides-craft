@@ -1,0 +1,76 @@
+{#
+ |------------------------------------------------------------------------------
+ | Recent Episodes Template
+ |------------------------------------------------------------------------------
+#}
+
+{% if pageTitle %}
+<div class="uk-section uk-section-muted uk-section-large uk-text-center">
+  <div class="uk-container">
+    <h1 class="uk-heading-primary">{{ entry.entryTitle }}</h1>
+  </div>
+</div>
+{% endif %}
+
+<div class="uk-section">
+  <div class="uk-container">
+    {% if not pageTitle %}
+      <h2 class="uk-text-center uk-margin-large">{{ 'Recent Episodes' | t }}</h2>
+    {% endif %}
+    {% set recentEpisodes = craft.entries.section('episode').limit(queryLimit).offset(queryOffset) %}
+    {% if recentEpisodes | length %}
+      <div class="uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid uk-height-match="target: > div > .uk-card > .card--content > .uk-card-body">
+        {% for e in recentEpisodes %}
+          <div>
+            <div class="uk-card uk-card-small uk-card-default uk-card-hover">
+              {% set featuredImage = e.featuredImage.one() ?? null %}
+              {% set tFeaturedImage = craft.imager.transformImage(featuredImage, { width: 960, height: 640 }) %}
+              {% if tFeaturedImage %}
+                <div class="uk-card-media-top">
+                  <a href="{{ e.url }}">
+                    <img data-src="{{ tFeaturedImage.url }}"
+                         alt="{{ tFeaturedImage.url }}"
+                         width="{{ tFeaturedImage.width }}"
+                         height="{{ tFeaturedImage.height }}" uk-img>
+                  </a>
+                </div>
+              {% endif %}
+              <div class="card--content">
+                <div class="uk-card-body">
+                  <h3 class="uk-card-title"><a href="{{ e.url }}" class="uk-link-text">{{ e.entryTitle }}</a></h3>
+                </div>
+                <div class="uk-card-footer">
+                  {% set eAuthor = e.theAuthor.one() ?? null %}
+                  {% if eAuthor %}
+                    <div class="uk-grid-small uk-flex-middle" uk-grid>
+                      {% set authorPortrait = eAuthor.portrait.one() ?? null %}
+                      {% set tPortrait = craft.imager.transformImage(authorPortrait, { width: 50, height: 50 }) %}
+                      {% if tPortrait %}
+                        <div class="uk-width-auto">
+                          <img data-src="{{ tPortrait.url }}"
+                               alt="{{ tPortrait.url }}"
+                               width="{{ tPortrait.width }}"
+                               height="{{ tPortrait.height }}"
+                               class="uk-border-pill" uk-img>
+                        </div>
+                      {% endif %}
+                      <div class="uk-width-expand">
+                        <h4 class="uk-margin-remove-bottom">{{ eAuthor.entryTitle }}</h4>
+                        <p class="uk-text-meta uk-margin-remove-top font-family--heading"><time datetime="{{ e.postDate | datetime }}">{{ e.postDate | datetime }}</time></p>
+                      </div>
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% if showButton %}
+      <p class="uk-margin-large uk-text-center">
+        <a href="{{ url('episodes') }}" class="uk-button uk-button-primary uk-button-large">{{ 'View all' | t }}</a>
+      </p>
+    {% endif %}
+  </div>
+</div>
