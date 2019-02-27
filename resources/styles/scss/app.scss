@@ -116,13 +116,14 @@ a.uk-link-text {
 }
 
 
-.uk-button-primary {
+.uk-button-primary, .uk-light .uk-button-primary {
   color: #fff;
   background-color: $primaryColor;
 
   &:hover,
   &:focus,
   &:active {
+    color: #fff;
     background-color: darken($primaryColor, 10%);
   }
 }
